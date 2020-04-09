@@ -44,9 +44,9 @@ const Usuario = sequelize.define('usuarios', {
 
 // Usuario.sync({force: true});
 
-Usuario.create({
-    nome: "Regis",
-    sobrenome: "Patrick",
-    idade: 33,
-    email: "regis@email.com"
-});
+// Usuario.create({
+//     nome: "Regis",
+//     sobrenome: "Patrick",
+//     idade: 33,
+//     email: "regis@email.com"
+// });
