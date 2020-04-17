@@ -11,7 +11,10 @@
         app.use(bodyParser.json())
     // Handlebars
         app.engine('handlebars', handlebars({defaultLayout: 'main'}))
-        app.set('view engine', 'handlebars')    
+        app.set('view engine', 'handlebars')
+    // Mongoose
+        // Em Breve
+    //             
 // Rotas
 
 // Outros
