@@ -12,7 +12,11 @@ const Sequelize = require('sequelize');
         host: "localhost",
         dialect: 'mysql'
     })
-    
+// Rotas
+    app.get('/cad', function(req, res) {
+        // res.send('Rota de cadastro de posts')
+        res.render('formulario')
+    })    
 
 // app.get("/", function(req, res){
 //     // res.send("Seja muito bem-vindo ao meu app!");
