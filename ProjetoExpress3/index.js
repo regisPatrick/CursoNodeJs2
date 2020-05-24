@@ -16,7 +16,11 @@ const Sequelize = require('sequelize');
     app.get('/cad', function(req, res) {
         // res.send('Rota de cadastro de posts')
         res.render('formulario')
-    })    
+    })
+
+    app.post('/add', function(req, res) {
+        res.send('Formulário recebido!')
+    })
 
 // app.get("/", function(req, res){
 //     // res.send("Seja muito bem-vindo ao meu app!");
