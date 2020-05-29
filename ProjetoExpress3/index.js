@@ -38,6 +38,14 @@ const Post = require('./models/Post')
         })
     })
 
+    app.get('/deletar/:id', function(req, res) {
+        Post.destroy({where: {'id': req.params.id}}).then(function(){
+            res.send("Postagem deletada com sucesso!")
+        }).catch(function(erro) {
+            res.send("Esta postagem não existe!")
+        })
+    })
+
 // app.get("/", function(req, res){
 //     // res.send("Seja muito bem-vindo ao meu app!");
 //     res.sendFile(__dirname + "/html/index.html");
