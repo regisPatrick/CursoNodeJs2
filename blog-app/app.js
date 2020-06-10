@@ -27,6 +27,11 @@ app.set('view engine', 'handlebars');
 // Public
     app.use(express.static(path.join(__dirname, 'public')))
 
+    // app.use((req, res, next) => {
+    //     console.log('Oi, eu sou um middleware!')
+    //     next()
+    // })
+
 // Rotas
     app.get('/', (req, res) => {
         res.send('Rota principal')
