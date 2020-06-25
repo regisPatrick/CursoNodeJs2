@@ -197,6 +197,17 @@ router.post('/postagem/edit', (req,res) => {
     })
 })
 
+router.get('/postagens/deletar/:id', (req, res) => {
+    // Postagem.remove({_id: req.params.id}).then(() => { // Método remove está depreciado
+    Postagem.deleteOne({_id: req.params.id}).then(() => {  
+        req.flash('success_msg', 'Postagem deletada com sucesso')
+        res.redirect('/admin/postagens')
+    }).catch((err) => {
+        req.flash('error_msg', 'Houve um erro interno')
+        res.redirect('/admin/postagens')
+    })
+})
+
 // router.get('/teste', (req, res) => {
 //     res.send('Isso é um teste')
 // })
