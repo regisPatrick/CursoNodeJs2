@@ -8,6 +8,8 @@ const path = require('path')
 const mongoose = require('mongoose')
 const session = require('express-session')
 const flash = require('connect-flash')
+require('./models/Postagem')
+const Postagem = mongoose.model('postagens')
 
 // Configuracoes
 // Sessão
@@ -49,7 +51,10 @@ app.set('view engine', 'handlebars');
 
 // Rotas
     app.get('/', (req, res) => {
-        res.send('Rota principal')
+        Postagem.find(),populate('categoria').sort.lean().then((postagens) => {
+
+        })
+        res.render('index')
     })
 
     app.get('/posts', (req, res) => {
