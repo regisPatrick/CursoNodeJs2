@@ -19,6 +19,14 @@ connection.connect(function(err) {
     console.log('connected as id: ' + connection.threadId);
 });
 
+connection.query("INSERT INTO users(nome, email) VALUES ('Adolfo', 'adolfo@email.com')", (err, result) => {
+    if(!err){
+        console.log('Usuario cadastrado com sucesso!');
+    }else{
+        console.log('Erro ao cadastrar o usuario!');
+    }
+});
+
 connection.query('SELECT * FROM users', function(err, rows, fields){
     if(!err){
         console.log('Resultado: ', rows);
