@@ -19,11 +19,19 @@ connection.connect(function(err) {
     console.log('connected as id: ' + connection.threadId);
 });
 
-connection.query("INSERT INTO users(nome, email) VALUES ('Adolfo', 'adolfo@email.com')", (err, result) => {
+// connection.query("INSERT INTO users(nome, email) VALUES ('Adolfo', 'adolfo@email.com')", (err, result) => {
+//     if(!err){
+//         console.log('Usuario cadastrado com sucesso!');
+//     }else{
+//         console.log('Erro ao cadastrar o usuario!');
+//     }
+// });
+
+connection.query("UPDATE users SET nome = 'Regis' where id = 1", (err, result) => {
     if(!err){
-        console.log('Usuario cadastrado com sucesso!');
+        console.log('Usuário editado com sucesso!');
     }else{
-        console.log('Erro ao cadastrar o usuario!');
+        console.log('Erro: o usuário não foi editado com sucesso!');
     }
 });
 
