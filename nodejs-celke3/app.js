@@ -27,11 +27,19 @@ connection.connect(function(err) {
 //     }
 // });
 
-connection.query("UPDATE users SET nome = 'Regis' where id = 1", (err, result) => {
+// connection.query("UPDATE users SET nome = 'Regis' where id = 1", (err, result) => {
+//     if(!err){
+//         console.log('Usuário editado com sucesso!');
+//     }else{
+//         console.log('Erro: o usuário não foi editado com sucesso!');
+//     }
+// });
+
+connection.query('DELETE FROM users where id = 3', (err, result) => {
     if(!err){
-        console.log('Usuário editado com sucesso!');
+        console.log('Usuário apagado com sucesso!');
     }else{
-        console.log('Erro: o usuário não foi editado com sucesso!');
+        console.log('Erro: o usuário não foi apagado com sucesso!');
     }
 });
 
