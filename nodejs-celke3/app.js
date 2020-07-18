@@ -1,23 +1,58 @@
 const express = require('express');
 const app = express();
 
-// Conexão com BD MySql
-const mysql = require('mysql');
-const connection = mysql.createConnection({
+const Sequelize = require('sequelize');
+
+const sequelize = new Sequelize('celke', 'root', 'root', {
     host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'celke'
+    dialect: 'mysql'
 });
 
-connection.connect(function(err) {
-    if(err) {
-        console.error('error connecting: ' + err.stack);
-        return;
+sequelize.authenticate().then(() => {
+    console.log('Conexão realizada com sucesso!');
+}).catch((err) => {
+    console.log('Erro ao realizar a conexão com BD: ' + err);
+});
+
+const Pagamento = sequelize.define('pagamentos', {
+    nome: {
+        type: Sequelize.STRING
+    },
+    valor: {
+        type: Sequelize.DOUBLE
     }
-
-    console.log('connected as id: ' + connection.threadId);
 });
+
+// Criar tabela com Sequelize
+// Pagamento.sync({force: true});
+
+// Inserir registro no banco de dados
+// Pagamento.create({
+//     nome: "Agua",
+//     valor: 150
+// }).then(() => {
+//     console.log('Registro inserido com sucesso!');
+// }).catch((err) => {
+//     console.log('Aconteceu um erro ao inserir o registro, tente novamento!' + err);
+// });
+
+// Conexão com BD MySql
+// const mysql = require('mysql');
+// const connection = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     password: 'root',
+//     database: 'celke'
+// });
+
+// connection.connect(function(err) {
+//     if(err) {
+//         console.error('error connecting: ' + err.stack);
+//         return;
+//     }
+
+//     console.log('connected as id: ' + connection.threadId);
+// });
 
 // connection.query("INSERT INTO users(nome, email) VALUES ('Adolfo', 'adolfo@email.com')", (err, result) => {
 //     if(!err){
@@ -35,21 +70,21 @@ connection.connect(function(err) {
 //     }
 // });
 
-connection.query('DELETE FROM users where id = 3', (err, result) => {
-    if(!err){
-        console.log('Usuário apagado com sucesso!');
-    }else{
-        console.log('Erro: o usuário não foi apagado com sucesso!');
-    }
-});
+// connection.query('DELETE FROM users where id = 3', (err, result) => {
+//     if(!err){
+//         console.log('Usuário apagado com sucesso!');
+//     }else{
+//         console.log('Erro: o usuário não foi apagado com sucesso!');
+//     }
+// });
 
-connection.query('SELECT * FROM users', function(err, rows, fields){
-    if(!err){
-        console.log('Resultado: ', rows);
-    }else{
-        console.log('Erro ao realizar a consulta');
-    }
-});
+// connection.query('SELECT * FROM users', function(err, rows, fields){
+//     if(!err){
+//         console.log('Resultado: ', rows);
+//     }else{
+//         console.log('Erro ao realizar a consulta');
+//     }
+// });
 
 app.get('/', function(req, res){
     // res.send('Gerenciador Financeiro');
