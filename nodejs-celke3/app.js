@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const handlebars = require('express-handlebars');
 
 const Sequelize = require('sequelize');
 
@@ -12,6 +13,20 @@ sequelize.authenticate().then(() => {
     console.log('Conexão realizada com sucesso!');
 }).catch((err) => {
     console.log('Erro ao realizar a conexão com BD: ' + err);
+});
+
+app.engine('handlebars', handlebars({defaultLayout: 'main'}))
+app.set('view engine', 'handlebars')
+
+// Rotas
+app.get('/pagamento', function(req, res){
+    // res.send('Página para listar os pagamentos');
+    res.render('pagamento');
+});
+
+app.get('/add-pagamento', function(req, res){
+    // res.send('Formulário para cadastrar pagamento');
+    res.render('add-pagamento');
 });
 
 const Pagamento = sequelize.define('pagamentos', {
@@ -86,23 +101,23 @@ const Pagamento = sequelize.define('pagamentos', {
 //     }
 // });
 
-app.get('/', function(req, res){
-    // res.send('Gerenciador Financeiro');
-    res.sendFile(__dirname + '/src/index.html');
-});
+// app.get('/', function(req, res){
+//     // res.send('Gerenciador Financeiro');
+//     res.sendFile(__dirname + '/src/index.html');
+// });
 
-app.get('/sobre-empresa', (req, res) => {
-    // res.send('Página sobre empresa');
-    res.sendFile(__dirname + '/src/sobre-empresa.html')
-});
+// app.get('/sobre-empresa', (req, res) => {
+//     // res.send('Página sobre empresa');
+//     res.sendFile(__dirname + '/src/sobre-empresa.html')
+// });
 
-app.get('/blog', (req, res) => {
-    res.send('Página do blog');
-});
+// app.get('/blog', (req, res) => {
+//     res.send('Página do blog');
+// });
 
-app.get('/contato', (req, res) => {
-    res.send('Página de contato');
-});
+// app.get('/contato', (req, res) => {
+//     res.send('Página de contato');
+// });
 
 // http://localhost:8080
 app.listen(8080, () => {
