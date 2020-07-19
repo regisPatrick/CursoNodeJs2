@@ -4,10 +4,13 @@
   "description": "cursonode",
   "main": "app.js",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "bootstrap": "4.5.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.1.0",
     "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
+    "ngx-bootstrap": "^5.6.1",
     "sequelize": "^6.3.3"
   },
   "devDependencies": {},

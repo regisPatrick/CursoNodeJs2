@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const handlebars = require('express-handlebars');
+const path = require('path');
+const bodyParser = require('body-parser');
 
 const Sequelize = require('sequelize');
 
@@ -15,8 +17,17 @@ sequelize.authenticate().then(() => {
     console.log('Erro ao realizar a conexão com BD: ' + err);
 });
 
+// Configurações
+
 app.engine('handlebars', handlebars({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
+//  Body-Parser
+app.use(bodyParser.urlencoded({ extended: false }))
+    // parse application/json
+app.use(bodyParser.json())   
+
+// Public
+app.use(express.static(path.join(__dirname, 'public')))
 
 // Rotas
 app.get('/pagamento', function(req, res){
@@ -24,9 +35,13 @@ app.get('/pagamento', function(req, res){
     res.render('pagamento');
 });
 
-app.get('/add-pagamento', function(req, res){
+app.get('/cad-pagamento', function(req, res){
     // res.send('Formulário para cadastrar pagamento');
-    res.render('add-pagamento');
+    res.render('cad-pagamento');
+});
+
+app.post('/add-pagamento', (req, res) => {
+    res.send('Nome: ' + req.body.nome + '<br>Valor: ' + req.body.valor + '<br>')
 });
 
 const Pagamento = sequelize.define('pagamentos', {
