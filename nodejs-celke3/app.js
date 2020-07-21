@@ -3,19 +3,7 @@ const app = express();
 const handlebars = require('express-handlebars');
 const path = require('path');
 const bodyParser = require('body-parser');
-
-const Sequelize = require('sequelize');
-
-const sequelize = new Sequelize('celke', 'root', 'root', {
-    host: 'localhost',
-    dialect: 'mysql'
-});
-
-sequelize.authenticate().then(() => {
-    console.log('Conexão realizada com sucesso!');
-}).catch((err) => {
-    console.log('Erro ao realizar a conexão com BD: ' + err);
-});
+const pagamento = require('./models/Pagamento')
 
 // Configurações
 
@@ -41,17 +29,25 @@ app.get('/cad-pagamento', function(req, res){
 });
 
 app.post('/add-pagamento', (req, res) => {
-    res.send('Nome: ' + req.body.nome + '<br>Valor: ' + req.body.valor + '<br>')
+    // res.send('Nome: ' + req.body.nome + '<br>Valor: ' + req.body.valor + '<br>')
+    pagamento.create({
+        nome: req.body.nome,
+        valor:req.body.valor
+    }).then(() => {
+        res.send('Pagamento cadastrado com sucesso!')
+    }).catch((err) => {
+        res.send('Erro: Pagamento não foi cadastrado com sucesso!' + err)
+    })
 });
 
-const Pagamento = sequelize.define('pagamentos', {
-    nome: {
-        type: Sequelize.STRING
-    },
-    valor: {
-        type: Sequelize.DOUBLE
-    }
-});
+// const Pagamento = sequelize.define('pagamentos', {
+//     nome: {
+//         type: Sequelize.STRING
+//     },
+//     valor: {
+//         type: Sequelize.DOUBLE
+//     }
+// });
 
 // Criar tabela com Sequelize
 // Pagamento.sync({force: true});
