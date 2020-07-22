@@ -1,1 +1,26 @@
-<h1>Listar pagamento</h1>
+<h1 class="titulo">Listar pagamento</h1>
+
+<div class="container tabelaPagamento">
+    <table class="tabela">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Valor</th>
+                <th>Data de Cadastro</th>
+            </tr>
+        </thead>
+        <tbody>
+{{#each pagamentos}}
+            <tr>
+                <td>{{dataValues.nome}}</td>
+                <td>{{dataValues.valor}}</td>
+                <td>{{#formatDate dataValues.createdAt}}{{/formatDate}}</td>
+            </tr>
+{{else}}
+    <div class="alert alert-danger">
+        <p>Não existem pagamentos para serem listados.</p>
+    </div>
+{{/each}}
+        </tbody>    
+    </table>
+</div>

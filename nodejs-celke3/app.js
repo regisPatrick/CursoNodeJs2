@@ -3,11 +3,19 @@ const app = express();
 const handlebars = require('express-handlebars');
 const path = require('path');
 const bodyParser = require('body-parser');
-const pagamento = require('./models/Pagamento')
+const moment = require('moment')
+const Pagamento = require('./models/Pagamento')
 
 // Configurações
 
-app.engine('handlebars', handlebars({defaultLayout: 'main'}))
+app.engine('handlebars', handlebars({
+    defaultLayout: 'main',
+    helpers: {
+        formatDate: (date) => {
+            return moment(date).format('DD/MM/YYYY')
+        }
+    }
+}))
 app.set('view engine', 'handlebars')
 //  Body-Parser
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -20,7 +28,11 @@ app.use(express.static(path.join(__dirname, 'public')))
 // Rotas
 app.get('/pagamento', function(req, res){
     // res.send('Página para listar os pagamentos');
-    res.render('pagamento');
+    Pagamento.findAll().then((pagamentos) => {
+        res.render('pagamento', {pagamentos: pagamentos});
+    }).catch((err) => {
+        console.log('Erro: Não foi possível listar os pagamentos' + err);
+    })
 });
 
 app.get('/cad-pagamento', function(req, res){
@@ -30,7 +42,7 @@ app.get('/cad-pagamento', function(req, res){
 
 app.post('/add-pagamento', (req, res) => {
     // res.send('Nome: ' + req.body.nome + '<br>Valor: ' + req.body.valor + '<br>')
-    pagamento.create({
+    Pagamento.create({
         nome: req.body.nome,
         valor:req.body.valor
     }).then(() => {
