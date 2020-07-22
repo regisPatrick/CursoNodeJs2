@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 // Rotas
 app.get('/pagamento', function(req, res){
     // res.send('Página para listar os pagamentos');
-    Pagamento.findAll().then((pagamentos) => {
+    Pagamento.findAll({order:[['id', 'DESC']]}).then((pagamentos) => {
         res.render('pagamento', {pagamentos: pagamentos});
     }).catch((err) => {
         console.log('Erro: Não foi possível listar os pagamentos' + err);
