@@ -53,6 +53,17 @@ app.post('/add-pagamento', (req, res) => {
     })
 });
 
+app.get('/del-pagamento/:id', (req, res) => {
+    Pagamento.destroy({
+        where: { 'id': req.params.id }
+    }).then(() => {
+        // res.send('Pagamento apagado com sucesso!');
+        res.redirect('/pagamento')
+    }).catch((err) => {
+        res.send('Pagamento não foi apagado com sucesso!' + err);
+    })
+});
+
 // const Pagamento = sequelize.define('pagamentos', {
 //     nome: {
 //         type: Sequelize.STRING

@@ -1,20 +1,26 @@
 <h1 class="titulo">Listar pagamento</h1>
 
+<a class="btn btn-info mt-4" href="/cad-pagamento">Ir para a página de cadastro de pagamentos</a>
+
 <div class="container tabelaPagamento">
     <table class="tabela">
         <thead>
             <tr>
+                <th>Codigo</th>
                 <th>Nome</th>
                 <th>Valor</th>
                 <th>Data de Cadastro</th>
+                <th>Excluir</th>
             </tr>
         </thead>
         <tbody>
 {{#each pagamentos}}
             <tr>
+                <td>{{dataValues.id}}</td>
                 <td>{{dataValues.nome}}</td>
                 <td>{{dataValues.valor}}</td>
                 <td>{{#formatDate dataValues.createdAt}}{{/formatDate}}</td>
+                <td><a href="/del-pagamento/{{dataValues.id}}" class="btn btn-danger">Apagar</a></td>
             </tr>
 {{else}}
     <div class="alert alert-danger">
