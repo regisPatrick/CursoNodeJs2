@@ -19,9 +19,16 @@ mongoose.connect('mongodb://localhost/celke', {
 
 app.get('/', (req, res) => {
     // res.send('Introdução a API REST');
-    return res.json({
-        titulo: 'Como criar API'
-    });
+    // return res.json({titulo: 'Como criar API'});
+
+    Artigo.find({}).then((artigos) => {
+        return res.json(artigos);
+    }).catch((err) => {
+        return res.status(400).json({
+            error: true,
+            message: "Nenhum artigo encontrado!"
+        })
+    })
 });
 
 app.post('/artigo', (req, res) => {
