@@ -31,6 +31,20 @@ app.get('/', (req, res) => {
     })
 });
 
+app.get('/artigo/:id', (req, res) => {
+    // console.log(req.params.id);
+
+    Artigo.findOne({_id: req.params.id}).then((artigo) => {
+        return res.json(artigo);
+    }).catch((err) => {
+        return res.status(400).json({
+            error: true,
+            message: "Nenhum artigo encontrado!"
+        })
+    })
+    // return res.json({id: req.params.id});
+})
+
 app.post('/artigo', (req, res) => {
     // console.log(req.body);
     // return res.json(req.body);
