@@ -10,7 +10,12 @@ const app = express();
 app.use(express.json());
 
 app.use((req, res, next) => {
-    console.log('Acessou o midleware!');
+    // console.log('Acessou o midleware!');
+    res.header('Access-Control-Allow-Origin', '*');
+    // res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
+    // res.header('Access-Control-Allow-Origin', 'http://celke.com.br');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    app.use(cors());
     next();
 });
 
