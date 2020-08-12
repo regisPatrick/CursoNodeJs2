@@ -2,9 +2,21 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const app = express();
 const router = express.Router();
+
+// Conecta ao banco
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb+srv://regis:regis123@cluster0.cibx5.mongodb.net/ndstr?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => {
+    console.log('Conectado ao Mongo')
+}).catch((err) => {
+    console.log('Erro ao se conectar: ' + err)
+});
 
 // Carrega as Rotas
 const indexRoute = require('./routes/index-route');
