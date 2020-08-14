@@ -18,8 +18,7 @@ const schema = new Schema({
     },
     description: {
         type: String,
-        required: true,
-        trim: true
+        required: true
     },
     price: {
         type: Number,
@@ -29,7 +28,11 @@ const schema = new Schema({
         type: Boolean,
         required: true,
         default: true
-    }
+    },
+    tags: [{
+        type: String,
+        required: true
+    }]
 });
 
 module.exports = mongoose.model('Product', schema);
