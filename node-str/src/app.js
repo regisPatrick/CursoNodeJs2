@@ -11,12 +11,16 @@ const router = express.Router();
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb+srv://regis:regis123@cluster0.cibx5.mongodb.net/ndstr?retryWrites=true&w=majority', {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true
 }).then(() => {
     console.log('Conectado ao Mongo')
 }).catch((err) => {
     console.log('Erro ao se conectar: ' + err)
 });
+
+// Carrega os Models
+const Product = require('./models/product');
 
 // Carrega as Rotas
 const indexRoute = require('./routes/index-route');
