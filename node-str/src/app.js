@@ -22,6 +22,7 @@ mongoose.connect('mongodb+srv://regis:regis123@cluster0.cibx5.mongodb.net/ndstr?
 // Carrega os Models
 const Product = require('./models/product');
 const Customer = require('./models/customer');
+const Order = require('./models/order');
 
 // Carrega as Rotas
 const indexRoute = require('./routes/index-route');
