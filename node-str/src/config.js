@@ -3,6 +3,6 @@ global.EMAIL_TMPL = '<strong>{0}</strong>';
 
 module.exports = {
     connectionString: 'mongodb+srv://regis:regis123@cluster0.cibx5.mongodb.net/ndstr?retryWrites=true&w=majority',
-    sendGridKey: 'TBD',
-    userImagesBlobConnectionString: 'TBD'
+    sendgridKey: 'TBD',
+    containerConnectionString: 'TBD'
 }

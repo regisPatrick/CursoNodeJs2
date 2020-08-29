@@ -3,13 +3,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const config = require('./config');
 
 const app = express();
 const router = express.Router();
 
 // Conecta ao banco
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb+srv://regis:regis123@cluster0.cibx5.mongodb.net/ndstr?retryWrites=true&w=majority', {
+// mongoose.connect('mongodb+srv://regis:regis123@cluster0.cibx5.mongodb.net/ndstr?retryWrites=true&w=majority', {
+mongoose.connect(config.connectionString, {    
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
