@@ -5,6 +5,8 @@ const Product = mongoose.model('Product');
 const ValidationContract = require('../validators/fluent-validator');
 const repository = require('../repositories/product-repository');
 const azure = require('azure-storage');
+const guid = require('guid');
+var config = require('../config');
 
 // exports.get = (req, res, next) => {
 //     repository.get()
@@ -125,13 +127,38 @@ exports.post = async(req, res, next) => {
 
     try{
         // Cria o Blob Service
-        const blobSvc = azure.createBlobService(config.userImagesBlobConnectionString);
+        const blobSvc = azure.createBlobService(config.containerConnectionString);
 
-        await repository.create(req.body);
+        let filename = guid.raw().toSring() + '.jpg';
+        let rawdata = req.body.image;
+        let matches = rawdata.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+        let type = matches[1];
+        let buffer = new Buffer(matches[2], 'base64');
+
+        // Salva a imagem
+        await blobSvc.createBlockBlobFromText('product-images', filename, buffer, {
+            contentType: type
+        }, function (error, result, response) {
+            if (error) {
+                filename = 'default-product.png'
+            }
+        });
+
+        // await repository.create(req.body);
+        await repository.create({
+            title: req.body.title,
+            slug: req.body.slug,
+            description: req.body.description,
+            price: req.body.price,
+            active: true,
+            tags: req.body.tags,
+            image: 'path do arquivo' + filename
+        });
         res.status(201).send({
             message: 'Produto cadastrado com sucesso!'
         });    
     } catch (e) {    
+        console.log(e);
         res.status(500).send({
             message: 'Falha ao processar sua requisição'
         });
