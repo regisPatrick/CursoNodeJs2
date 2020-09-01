@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const Product = mongoose.model('Product');
 const ValidationContract = require('../validators/fluent-validator');
 const repository = require('../repositories/product-repository');
+const azure = require('azure-storage');
 
 // exports.get = (req, res, next) => {
 //     repository.get()
@@ -123,6 +124,9 @@ exports.post = async(req, res, next) => {
     }
 
     try{
+        // Cria o Blob Service
+        const blobSvc = azure.createBlobService(config.userImagesBlobConnectionString);
+
         await repository.create(req.body);
         res.status(201).send({
             message: 'Produto cadastrado com sucesso!'
