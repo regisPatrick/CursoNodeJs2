@@ -10,8 +10,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //     res.send('OK');
 // });
 
-require('./controllers/authController')(app);
-require('./controllers/projectController')(app);
+require('./controllers/index')(app);
 
 app.listen(3000, () => {
     console.log('Servidor rodando na porta 3000')
