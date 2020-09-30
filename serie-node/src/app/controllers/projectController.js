@@ -9,7 +9,14 @@ const router = express.Router();
 router.use(authMiddleware);
 
 router.get('/', async (req, res) => {
-    res.send({ user: req.userId });
+    // res.send({ user: req.userId });
+    try{
+        const projects = await Project.find();
+
+        return res.send({ projects });
+    } catch (err) {
+        return res.status(400).send({ error: 'Error loading projects' });
+    }
 });
 
 router.get('/:projectId', async (req, res) => {
@@ -17,7 +24,14 @@ router.get('/:projectId', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    res.send({ user: req.userId });
+    // res.send({ user: req.userId });
+    try{
+        const project = await Project.create(req.body);
+
+        return res.send({ projetc });
+    } catch (err) {
+        return res.status(400).send({ error: 'Error creating new project' });
+    }
 });
 
 router.put('/:projectId', async (req, res) => {

@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const ProjectSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true
+        require: true
     },
     description: {
         type: String,
