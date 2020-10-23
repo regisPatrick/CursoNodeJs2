@@ -13,6 +13,10 @@ app.get('/blog', function(req, res){
     res.send('Bem vindo ao meu blog!');
 });
 
+app.get('/ola', function(req, res){
+    res.send("Ola");
+});
+
 app.listen(8081, function(){
     console.log("Servidor Rodando na url http://localhost:8081");
 });
