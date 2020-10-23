@@ -13,7 +13,7 @@ app.get('/blog', function(req, res){
     res.send('Bem vindo ao meu blog!');
 });
 
-app.get('/ola', function(req, res){
+app.get('/ola/:nome', function(req, res){
     res.send("Ola");
 });
 
