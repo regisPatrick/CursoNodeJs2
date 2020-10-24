@@ -13,8 +13,8 @@ app.get('/blog', function(req, res){
     res.send('Bem vindo ao meu blog!');
 });
 
-app.get('/ola/:cargo/:nome', function(req, res){
-    res.send(req.params);
+app.get('/ola/:cargo/:nome/:cor', function(req, res){
+    res.send('Ola ' + req.params.nome);
 });
 
 app.listen(8081, function(){
