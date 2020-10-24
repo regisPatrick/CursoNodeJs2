@@ -14,7 +14,7 @@ app.get('/blog', function(req, res){
 });
 
 app.get('/ola/:cargo/:nome', function(req, res){
-    res.send("Ola");
+    res.send(req.params);
 });
 
 app.listen(8081, function(){
