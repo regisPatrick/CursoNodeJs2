@@ -19,4 +19,16 @@ const Postagem = sequelize.define('postagens', {
     }
 })
 
-Postagem.sync({force: true})
+// Postagem.sync({force: true})
+
+const Usuario = sequelize.define('usuarios', {
+    nome: {
+        type: Sequelize.STRING
+    },
+    sobrenome: {
+        type: Sequelize.STRING
+    },
+    idade: {
+        type: Sequelize.INTEGER
+    }
+})
