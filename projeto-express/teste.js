@@ -30,5 +30,10 @@ const Usuario = sequelize.define('usuarios', {
     },
     idade: {
         type: Sequelize.INTEGER
+    },
+    email: {
+        type: Sequelize.STRING
     }
 })
+
+// Usuario.sync({force: true})
